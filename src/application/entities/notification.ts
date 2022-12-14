@@ -5,7 +5,7 @@ export interface NotificationAttrs {
     content: Content;
     category: string;
     readAt?: Date | null;
-    createdAt: Date;
+    createdAt?: Date;
 }
 
 
@@ -13,7 +13,10 @@ export class Notification {
     private attrs: NotificationAttrs
 
     constructor(attrs: NotificationAttrs) {
-        this.attrs;
+        if (attrs.createdAt === undefined) {
+            attrs.createdAt = new Date();
+        }
+        this.attrs = attrs;
     }
 
     public set recipientId(recipientId: string) {
@@ -46,5 +49,9 @@ export class Notification {
     
     public get readAt(): Date {
         return this.attrs.readAt;
+    }
+
+    public get createdAt(): Date {
+        return this.attrs.createdAt;
     }
 }
