@@ -7,7 +7,7 @@ describe('Send notification', () => {
     it('should be able to snd a notification', async () => {
         const sendNotification = new SendNotification();
 
-        const notification = await sendNotification.execute(
+        const { notification } = await sendNotification.execute(
             {
             content: 'notifying',
             category: 'warning',
@@ -16,7 +16,7 @@ describe('Send notification', () => {
             testNotificationRepository
         );
 
-        expect(notification).toBeTruthy();
         expect(testNotificationRepository.notifications).toHaveLength(1);
+        expect(testNotificationRepository.notifications[0]).toEqual(notification);
     });
 });
