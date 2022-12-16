@@ -1,13 +1,9 @@
 import { Notification } from "../entities/notification";
 import { SendNotification } from "./send-notification";
+import { InMemoryNotificationRepository } from '../../test/in-memory-notification-repository';
 
 describe('Send notification', () => {
-    const testNotifications: Array<Notification> = [];
-    const testNotificationRepository = {
-        async create(notification: Notification) {
-            testNotifications.push(notification);
-        },
-    }
+    const testNotificationRepository = new InMemoryNotificationRepository();
 
     it('should be able to snd a notification', async () => {
         const sendNotification = new SendNotification();
@@ -22,6 +18,6 @@ describe('Send notification', () => {
         );
 
         expect(notification).toBeTruthy();
-        expect(testNotifications).toHaveLength(1);
+        expect(testNotificationRepository.notifications).toHaveLength(1);
     });
 });
