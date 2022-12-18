@@ -4,17 +4,14 @@ import { InMemoryNotificationRepository } from '../../test/in-memory-notificatio
 describe('Send notification', () => {
     const testNotificationRepository = new InMemoryNotificationRepository();
 
-    it('should be able to snd a notification', async () => {
-        const sendNotification = new SendNotification();
+    it('should be able to send a notification', async () => {
+        const sendNotification = new SendNotification(testNotificationRepository);
 
-        const { notification } = await sendNotification.execute(
-            {
+        const { notification } = await sendNotification.execute({
             content: 'notifying',
             category: 'warning',
             recipientId: 'example-recipient-id'
-            },
-            testNotificationRepository
-        );
+        });
 
         expect(testNotificationRepository.notifications).toHaveLength(1);
         expect(testNotificationRepository.notifications[0]).toEqual(notification);

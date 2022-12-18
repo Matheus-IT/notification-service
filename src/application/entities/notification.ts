@@ -1,4 +1,5 @@
 import { Content } from "./notification-content";
+import { randomUUID } from "crypto";
 
 export interface NotificationAttrs {
     recipientId: string;
@@ -10,6 +11,7 @@ export interface NotificationAttrs {
 
 
 export class Notification {
+    private _id: string;
     private attrs: NotificationAttrs
 
     constructor(attrs: NotificationAttrs) {
@@ -17,6 +19,11 @@ export class Notification {
             attrs.createdAt = new Date();
         }
         this.attrs = attrs;
+        this._id = randomUUID();
+    }
+
+    public get id() {
+        return this._id;
     }
 
     public set recipientId(recipientId: string) {
