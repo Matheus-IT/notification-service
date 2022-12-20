@@ -1,18 +1,18 @@
-import { Content } from "./notification-content";
-import { randomUUID } from "crypto";
+import { Content } from './notification-content';
+import { randomUUID } from 'crypto';
 
 export interface NotificationAttrs {
     recipientId: string;
     content: Content;
     category: string;
     readAt?: Date | null;
+    canceledAt?: Date | null;
     createdAt?: Date;
 }
 
-
 export class Notification {
     private _id: string;
-    private attrs: NotificationAttrs
+    private attrs: NotificationAttrs;
 
     constructor(attrs: NotificationAttrs) {
         if (attrs.createdAt === undefined) {
@@ -29,15 +29,15 @@ export class Notification {
     public set recipientId(recipientId: string) {
         this.attrs.recipientId = recipientId;
     }
-    
+
     public get recipientId(): string {
         return this.attrs.recipientId;
     }
-    
+
     public set content(content: Content) {
         this.attrs.content = content;
     }
-    
+
     public get content(): Content {
         return this.attrs.content;
     }
@@ -45,20 +45,31 @@ export class Notification {
     public set category(category: string) {
         this.attrs.category = category;
     }
-    
+
     public get category(): string {
         return this.attrs.category;
     }
-    
+
     public set readAt(readAt: Date) {
         this.attrs.readAt = readAt;
     }
-    
+
     public get readAt(): Date {
-        return this.attrs.readAt;
+        if (this.attrs.readAt) {
+            return this.attrs.readAt;
+        }
+        return new Date();
     }
 
-    public get createdAt(): Date {
+    public cancel() {
+        this.attrs.canceledAt = new Date();
+    }
+
+    public get canceledAt(): Date | null | undefined {
+        return this.attrs.canceledAt;
+    }
+
+    public get createdAt(): Date | null | undefined {
         return this.attrs.createdAt;
     }
 }
