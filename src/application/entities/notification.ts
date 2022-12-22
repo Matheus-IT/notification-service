@@ -14,12 +14,12 @@ export class Notification {
     private _id: string;
     private attrs: NotificationAttrs;
 
-    constructor(attrs: NotificationAttrs) {
+    constructor(attrs: NotificationAttrs, id?: string) {
         if (attrs.createdAt === undefined) {
             attrs.createdAt = new Date();
         }
         this.attrs = attrs;
-        this._id = randomUUID();
+        this._id = id ?? randomUUID();
     }
 
     public get id() {
