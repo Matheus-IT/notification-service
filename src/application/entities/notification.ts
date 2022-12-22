@@ -50,8 +50,12 @@ export class Notification {
         return this.attrs.category;
     }
 
-    public set readAt(readAt: Date | null | undefined) {
-        this.attrs.readAt = readAt;
+    public read() {
+        this.attrs.readAt = new Date();
+    }
+
+    public unread() {
+        this.attrs.readAt = null;
     }
 
     public get readAt(): Date | null | undefined {

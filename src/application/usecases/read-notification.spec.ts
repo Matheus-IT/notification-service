@@ -1,13 +1,13 @@
 import { Notification } from '@application/entities/notification';
 import { Content } from '@application/entities/notification-content';
 import { InMemoryNotificationRepository } from '../../test/in-memory-notification-repository';
-import { CancelNotification } from './cancel-notification';
 import { NotificationNotFound } from './errors/notification-not-found';
+import { ReadNotification } from './read-notification';
 
-describe('Cancel notification', () => {
-    it('should be able to cancel a notification', async () => {
+describe('Read notification', () => {
+    it('should be able to read a notification', async () => {
         const repository = new InMemoryNotificationRepository();
-        const cancelNotification = new CancelNotification(repository);
+        const usecase = new ReadNotification(repository);
 
         const notification = new Notification({
             category: 'social',
@@ -16,18 +16,16 @@ describe('Cancel notification', () => {
         });
 
         await repository.create(notification);
-        await cancelNotification.execute({
+        await usecase.execute({
             notificationId: notification.id,
         });
 
-        expect(repository.notifications[0].canceledAt).toEqual(
-            expect.any(Date),
-        );
+        expect(repository.notifications[0].readAt).toEqual(expect.any(Date));
     });
 
-    it('should not be able to cancel a non existing notification', () => {
+    it('should not be able to read a non existing notification', () => {
         const repository = new InMemoryNotificationRepository();
-        const cancelNotification = new CancelNotification(repository);
+        const cancelNotification = new ReadNotification(repository);
 
         expect(() => {
             return cancelNotification.execute({
