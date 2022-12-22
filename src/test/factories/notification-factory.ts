@@ -11,12 +11,12 @@ export async function makeNotification(
     override: Override = {},
     repository: NotificationRepository,
 ) {
-    return await repository.create(
-        new Notification({
-            recipientId: 'recipient-1',
-            content: new Content('test content'),
-            category: 'social',
-            ...override,
-        }),
-    );
+    const notification = new Notification({
+        recipientId: 'recipient-1',
+        content: new Content('test content'),
+        category: 'social',
+        ...override,
+    });
+    await repository.create(notification);
+    return notification;
 }
