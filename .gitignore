@@ -1,6 +1,7 @@
 # compiled output
 /dist
 /node_modules
+/notification-producer/node_modules
 
 # Logs
 logs
