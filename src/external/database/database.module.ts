@@ -1,7 +1,8 @@
-import { Module } from "@nestjs/common";
-import { NotificationRepository } from "src/application/repositories/notifications-repository";
-import { PrismaService } from "./prisma/prisma.service";
-import { PrismaNotificationRepository } from "./prisma/repositories/prisma-notification-repository";
+import { Module } from '@nestjs/common';
+import { NotificationRepository } from '@application/repositories/notifications-repository';
+
+import { PrismaNotificationRepository } from './prisma/repositories/prisma-notification-repository';
+import { PrismaService } from './prisma/prisma.service';
 
 @Module({
     providers: [
@@ -9,10 +10,8 @@ import { PrismaNotificationRepository } from "./prisma/repositories/prisma-notif
         {
             provide: NotificationRepository,
             useClass: PrismaNotificationRepository,
-        }
+        },
     ],
-    exports: [
-        NotificationRepository,
-    ]
+    exports: [NotificationRepository],
 })
 export class DatabaseModule {}

@@ -1,5 +1,5 @@
-import { Notification } from '@application/entities/notification';
-import { Content } from '@application/entities/notification-content';
+import { Notification } from '../entities/notification';
+import { Content } from '../entities/notification-content';
 import { InMemoryNotificationRepository } from '../../test/in-memory-notification-repository';
 import { NotificationNotFound } from './errors/notification-not-found';
 import { ReadNotification } from './read-notification';

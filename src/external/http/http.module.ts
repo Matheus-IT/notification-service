@@ -4,8 +4,8 @@ import { GetRecipientNotifications } from '@application/usecases/get-recipient-n
 import { ReadNotification } from '@application/usecases/read-notification';
 import { UnreadNotification } from '@application/usecases/unread-notifications';
 import { Module } from '@nestjs/common';
-import { SendNotification } from 'src/application/usecases/send-notification';
-import { DatabaseModule } from '../database/database.module';
+import { SendNotification } from '@application/usecases/send-notification';
+import { DatabaseModule } from '@external/database/database.module';
 import { NotificationsController } from './controllers/notifications.controller';
 
 @Module({
